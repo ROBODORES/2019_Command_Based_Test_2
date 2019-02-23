@@ -34,4 +34,14 @@ public class RobotMap {
   public static final int leftMotorFollower = 1;
   public static final int rightMotor = 2;
   public static final int rightMotorFollower = 3;
+
+  //VictorSPXs
+  public static final int armMotor = 4;
+
+  //Encoder Ports
+  public static final int armSourceA = 0;
+  public static final int armSourceB = 1;
+
+  //Limit Switches
+  public static final int armlimit = 3;
 }

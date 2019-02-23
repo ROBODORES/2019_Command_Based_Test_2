@@ -9,13 +9,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-public class Drive extends Command {
-  public Drive() {
+public class SetArm extends Command {
+  double angle;
+
+  public SetArm(double angle) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_driveTrain);
+    requires(Robot.m_arm);
+    this.angle = angle;
   }
 
   // Called just before this Command runs the first time
@@ -26,11 +28,7 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double leftSpeed = -Robot.m_oi.leftStick.getY();
-    double rightSpeed = -Robot.m_oi.rightStick.getY();
-    double limiter = 0.8;
-
-    Robot.m_driveTrain.tankDrive(leftSpeed*limiter, rightSpeed*limiter);
+    Robot.m_arm.getSetpoint((int)(angle));
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -42,13 +40,11 @@ public class Drive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_driveTrain.tankDrive(0, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }
